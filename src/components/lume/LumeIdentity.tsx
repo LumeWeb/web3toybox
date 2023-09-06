@@ -1,6 +1,6 @@
 // src/components/sign-in-with-lume.tsx
 import React from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, Variant, motion } from 'framer-motion';
 
 import LumeLogoBg from '@/assets/lume-logo-bg.svg';
 import { Button } from '@/components/ui/button';
@@ -41,18 +41,18 @@ const LumeIdentity: React.FC<Props> = ({ onSignIn, onSignOut }) => {
 
 };
 
-const variants = {
-  hidden: { y: 50, opacity: 0 },
+const variants: Record<string, Variant> = {
+  hidden: { y: 50, opacity: 0, position: 'absolute' },
   show: {
     y: 0,
     opacity: 1,
+    position: 'relative',
     transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 10
-    }
+      type: "tween",
+      ease: 'easeInOut'
+    },
   },
-  exit: { y: -50, opacity: 0 }
+  exit: { y: -50, opacity: 0, position: 'absolute' }
 };
 
 const SwitchableComponent = () => {
