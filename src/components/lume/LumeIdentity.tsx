@@ -1,6 +1,7 @@
 // src/components/sign-in-with-lume.tsx
 import React, { useCallback, useMemo } from 'react';
 import { AnimatePresence, Variant, motion } from 'framer-motion';
+import { useForm } from "react-hook-form";
 
 import LumeLogoBg from '@/assets/lume-logo-bg.svg';
 import { Button } from '@/components/ui/button';
@@ -68,20 +69,33 @@ const LumeIdentity: React.FC<Props> = ({ onSignIn, onSignUp }) => {
   const SeedPhraseForm = useMemo(() => {
     return {
       render({ phraseLength = 12 }: { phraseLength: number }) {
-        return <div className="w-full h-full flex-wrap justify-center items-center gap-2.5 inline-flex">
+        const { register, handleSubmit, formState: { errors } } = useForm();
+
+        const onSubmit = (data: any) => {
+          console.log(data);
+        };
+
+        return <form onSubmit={handleSubmit(onSubmit)}
+          className="w-full h-full flex-wrap justify-center items-center gap-2.5 inline-flex">
           {Array(phraseLength).fill(null).map((_, index) => {
-            return <div className="justify-center items-center gap-2.5 flex w-[calc(33%-10px)] h-10 rounded border border-neutral-700 relative">
-              <input className=" text-white text-lg font-normal leading-normal w-full h-full px-2.5 bg-transparent text-center" /> {/* TODO: Add Support for the real values, this should be its own component */}
-              <span className="left-[6px] top-[-2px] absolute text-neutral-700 text-xs font-normal leading-normal">{index + 1}</span>
-            </div>
+            const fieldName = `phrase${index}`;
+            return (
+              <div className={`justify-center items-center gap-2.5 flex w-[calc(33%-10px)] h-10 rounded border border-current relative ring-current ${errors[fieldName] ? 'text-red-500' : 'text-neutral-700'}`}>
+                <input
+                  {...register(fieldName, { required: true })}
+                  className=" text-white text-lg font-normal leading-normal w-full h-full px-2.5 bg-transparent text-center"
+                />
+                <span className="left-[6px] top-0 absolute text-current text-xs font-normal leading-normal">{index + 1}</span>
+              </div>)
           })}
-        </div>
+          <button hidden className='hidden'></button>
+        </form>
       },
       index: Symbol('seed-phrase-form').toString()
     }
   }, []);
 
-  const [visibleComponent, setVisibleComponent] = React.useState(SubmitButton);
+  const [visibleComponent, setVisibleComponent] = React.useState(SubmitButton as { render: (props: Record<string, any>) => React.ReactElement, index: string });
 
   const isSubmitButtonInView = [SubmitButton.index].includes(visibleComponent.index)
   const isCreatingAccount = [SetupAccountKey.index, SeedPhraseForm.index].includes(visibleComponent.index)
