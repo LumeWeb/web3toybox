@@ -28,18 +28,18 @@ const LumeIdentity: React.FC<Props> = ({ }) => {
     </div>
     <div className="w-full z-10 flex flex-col items-center justify-center gap-10">
       <div className="flex flex-col items-start justify-start gap-10">
-        <h2 className="w-full text-5xl font-normal leading-10 text-white">
+        <h2 className="w-full text-5xl font-normal leading-14 text-white">
           {isSubmitButtonInView || isLoginWithAccountKey ? 'Sign in with Lume' : null}
           {isCreatingAccount && !isShowingSeedPhrase ? 'Set up your account key' : null}
           {isShowingSeedPhrase ? "Here's your account key" : null}
         </h2>
       </div>
       <div className="flex flex-col items-start justify-start gap-2.5">
-        <SwitchableComponent index={visibleComponent.index}>
           <LazyMotion features={domAnimation}>
-            <visibleComponent.render />
+            <SwitchableComponent index={visibleComponent.index}>
+                <visibleComponent.render />
+            </SwitchableComponent>
           </LazyMotion>
-        </SwitchableComponent>
         {!isFinalStep ? <>
           <div className={`relative h-7 w-full overflow-hidden ${coloredOrLine}`}>
             <svg width="409" height="28" className="max-w-full -left-1/2" viewBox="0 0 409 28" fill="none" xmlns="http://www.w3.org/2000/svg">

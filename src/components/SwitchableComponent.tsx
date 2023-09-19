@@ -1,4 +1,4 @@
-import { Variant, AnimatePresence, motion } from "framer-motion";
+import { Variant, AnimatePresence, m } from "framer-motion";
 import React from "react";
 
 const SwitchableComponentContext = React.createContext<SwitchableComponentContextType | undefined>(undefined);
@@ -33,6 +33,7 @@ const variants: Record<string, Variant> = {
   hidden: { y: 50, opacity: 0, position: 'absolute' },
   show: {
     y: 0,
+    x: 0,
     opacity: 1,
     position: 'relative',
     transition: {
@@ -44,18 +45,21 @@ const variants: Record<string, Variant> = {
 };
 
 export const SwitchableComponent = ({ children, index }: React.PropsWithChildren<{ index: string }>) => {
+  const [width, setWidth] = React.useState<number>()
   return (
     <AnimatePresence>
-      <motion.div
+      <m.div
         key={index}
         initial="hidden"
         animate="show"
         exit="exit"
         variants={variants}
         className="h-full w-full"
+        style={{maxWidth: width ?? 'auto'}}
+        onTransitionEnd={(e) => setWidth(e.currentTarget.getBoundingClientRect().width!)}
       >
         {children}
-      </motion.div>
+      </m.div>
     </AnimatePresence>
   );
 };

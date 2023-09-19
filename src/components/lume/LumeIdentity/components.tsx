@@ -47,15 +47,16 @@ const SeedPhraseInputComponent = ({ }) => {
 
 const SetupAccountKeyComponent = () => {
   const { setVisibleComponent } = useSwitchableComponent();
-  const [width, setWidth] = React.useState(0);
+  const [width, setWidth] = React.useState<number>();
 
   return (
     <m.div
       initial={{ y: 50 }}
       animate={{ y: 0 }}
-      exit={{ y: -50, height: 'auto', maxWidth: width }}
+      exit={{ y: -50, height: 'auto' }}
       transition={{ type: "just", delay: 0.1 }}
       className="min-h-12 h-full max-w-full"
+      style={{ maxWidth: width ?? 'auto' }}
       ref={(t) => setTimeout(() => setWidth(t?.getBoundingClientRect().width!), 0)}
     >
       <Button className='w-full h-full' onClick={() => setVisibleComponent(components.SeedPhraseGeneration)}>
@@ -90,19 +91,14 @@ const SeedPhraseGenerationComponent = ({ phraseLength = 12 }) => {
       <AnimatePresence>
         {step === 1 ? <m.div className={`z-10 absolute top-0 bottom-0 left-0 right-0 bg-black pointer-events-none`}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.75, top: -120, left: -20, right: -20, bottom: 120 }}
+          animate={{ opacity: 0.75, top: -200, left: -20, right: -20, bottom: 120 }}
           transition={{ type: "tween", duration: 0.1 }}
-        // onAnimationComplete={() => {
-        //   setTimeout(() => {
-        //     setOpacity(1);
-        //   }, 2000);
-        // }}
         ></m.div> : null}
       </AnimatePresence>
       <div className="z-20 relative mb-2.5 w-full h-full flex-wrap justify-center items-center gap-2.5 inline-flex">
         {phrases.map((phrase, index) => (
-          <div className={`justify-center items-center gap-2.5 flex w-[calc(33%-10px)] h-10 rounded border border-current relative ring-current text-neutral-700`}>
-            <span className=" text-white text-lg font-normal leading-normal w-full h-fit px-2.5 bg-transparent text-center">{phrase}</span>
+          <div key={`SeedPhrase_${index}`} className={`justify-center items-center gap-2.5 flex w-[calc(33%-10px)] h-10 rounded border border-current relative ring-current text-neutral-700`}>
+            <span className=" text-white text-md font-normal leading-normal w-full h-fit px-2.5 bg-transparent text-center">{phrase}</span>
             <span className="left-[6px] top-0 absolute text-current text-xs font-normal leading-normal">{index + 1}</span>
           </div>
         ))}
