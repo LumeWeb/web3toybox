@@ -52,7 +52,7 @@ export const SwitchableComponent = ({ children, index }: React.PropsWithChildren
         animate="show"
         exit="exit"
         variants={variants}
-        className="h-full min-h-12 w-96"
+        className="h-full w-full"
       >
         {children}
       </motion.div>

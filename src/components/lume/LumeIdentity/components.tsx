@@ -2,7 +2,7 @@ import { makeSwitchable, useSwitchableComponent } from "@/components/SwitchableC
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CheckIcon, ClipboardCopyIcon, ExclamationTriangleIcon } from "@radix-ui/react-icons";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import React from "react";
 import { useLumeIndentity } from "./LumeIdentityContext";
 
@@ -19,7 +19,7 @@ const SubmitButtonComponent = ({ }) => {
 const SeedPhraseInputComponent = ({ }) => {
   const { signIn } = useLumeIndentity();
   return (
-    <motion.form className='flex-col flex gap-y-4' onSubmit={(e) => {
+    <m.form className='flex-col flex gap-y-4' onSubmit={(e) => {
       e.preventDefault();
       const target = e.target as typeof e.target & {
         elements: {
@@ -30,7 +30,7 @@ const SeedPhraseInputComponent = ({ }) => {
       signIn(seedPhrase)
     }}>
       <Input className='h-12 w-full text-lg' name="seedPhrase" />
-      <motion.div
+      <m.div
         initial={{ y: 50 }}
         animate={{ y: 0 }}
         exit={{ y: -50 }}
@@ -40,26 +40,30 @@ const SeedPhraseInputComponent = ({ }) => {
         <Button className='w-full h-full' role="submit">
           <span className="text-center text-lg font-normal leading-normal">Sign in</span>
         </Button>
-      </motion.div>
-    </motion.form>
+      </m.div>
+    </m.form>
   );
 };
 
 const SetupAccountKeyComponent = () => {
   const { setVisibleComponent } = useSwitchableComponent();
+  const [width, setWidth] = React.useState(0);
+  
+  console.log({width})
 
   return (
-    <motion.div
+    <m.div
       initial={{ y: 50 }}
       animate={{ y: 0 }}
-      exit={{ y: -50 }}
+      exit={{ y: -50, height: 'auto', maxWidth: width }}
       transition={{ type: "just", delay: 0.1 }}
-      className="h-12"
+      className="min-h-12 h-full max-w-full"
+      ref={(t) => setTimeout(() => setWidth(t?.getBoundingClientRect().width!), 0)}
     >
       <Button className='w-full h-full' onClick={() => setVisibleComponent(components.SeedPhraseGeneration)}>
         <span className="text-center text-lg font-normal leading-normal">I get it, I'll keep it safe. Let's see the key.</span>
       </Button>
-    </motion.div>
+    </m.div>
   )
 };
 
@@ -86,7 +90,7 @@ const SeedPhraseGenerationComponent = ({ phraseLength = 12 }) => {
   return (
     <div className="relative">
       <AnimatePresence>
-        {step === 1 ? <motion.div className={`z-10 absolute top-0 bottom-0 left-0 right-0 bg-black pointer-events-none`}
+        {step === 1 ? <m.div className={`z-10 absolute top-0 bottom-0 left-0 right-0 bg-black pointer-events-none`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.75, top: -120, left: -20, right: -20, bottom: 120 }}
           transition={{ type: "tween", duration: 0.1 }}
@@ -95,7 +99,7 @@ const SeedPhraseGenerationComponent = ({ phraseLength = 12 }) => {
         //     setOpacity(1);
         //   }, 2000);
         // }}
-        ></motion.div> : null}
+        ></m.div> : null}
       </AnimatePresence>
       <div className="z-20 relative mb-2.5 w-full h-full flex-wrap justify-center items-center gap-2.5 inline-flex">
         {phrases.map((phrase, index) => (
@@ -105,7 +109,7 @@ const SeedPhraseGenerationComponent = ({ phraseLength = 12 }) => {
           </div>
         ))}
         <AnimatePresence>
-          {step === 1 ? <motion.div className="text-red-400 flex flex-row gap-5 py-8"
+          {step === 1 ? <m.div className="text-red-400 flex flex-row gap-5 py-8"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
@@ -113,7 +117,7 @@ const SeedPhraseGenerationComponent = ({ phraseLength = 12 }) => {
           >
             <ExclamationTriangleIcon className="w-14 h-14" />
             <span>Make sure to write this down for safe keeping.</span>
-          </motion.div> : null}
+          </m.div> : null}
         </AnimatePresence>
         <Button className={`w-full h-12 ${buttonClickedState === 'clicked' ? '!text-primary !border-primary' : ''}`} variant="outline" onClick={copyPhrasesToClipboard}>
           {buttonClickedState === 'clicked' ? <CheckIcon className="w-5 h-5 mr-2.5" /> : <ClipboardCopyIcon className="w-5 h-5 mr-2.5" />}
@@ -126,7 +130,7 @@ const SeedPhraseGenerationComponent = ({ phraseLength = 12 }) => {
         </Button>
       ) : null}
       <AnimatePresence>
-        {step === 1 ? <motion.div className="z-20 w-full h-12"
+        {step === 1 ? <m.div className="z-20 w-full h-12"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
@@ -135,7 +139,7 @@ const SeedPhraseGenerationComponent = ({ phraseLength = 12 }) => {
           <Button className="w-full h-full" onClick={() => signIn(key)}>
             Sign In
           </Button>
-        </motion.div> : null}
+        </m.div> : null}
       </AnimatePresence>
     </div>
   )
