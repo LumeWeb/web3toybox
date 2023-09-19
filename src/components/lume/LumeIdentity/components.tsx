@@ -48,8 +48,6 @@ const SeedPhraseInputComponent = ({ }) => {
 const SetupAccountKeyComponent = () => {
   const { setVisibleComponent } = useSwitchableComponent();
   const [width, setWidth] = React.useState(0);
-  
-  console.log({width})
 
   return (
     <m.div
