@@ -6,6 +6,7 @@ import { SwitchableComponent, SwitchableComponentProvider, useSwitchableComponen
 import ComponentList from "./components";
 import { LumeIdentityContext, Session } from './LumeIdentityContext';
 import { LazyMotion, domAnimation } from 'framer-motion';
+import * as Dialog from '@radix-ui/react-dialog';
 
 type Props = {}
 
@@ -35,11 +36,11 @@ const LumeIdentity: React.FC<Props> = ({ }) => {
         </h2>
       </div>
       <div className="flex flex-col items-start justify-start gap-2.5">
-          <LazyMotion features={domAnimation}>
-            <SwitchableComponent index={visibleComponent.index}>
-                <visibleComponent.render />
-            </SwitchableComponent>
-          </LazyMotion>
+        <LazyMotion features={domAnimation}>
+          <SwitchableComponent index={visibleComponent.index}>
+            <visibleComponent.render />
+          </SwitchableComponent>
+        </LazyMotion>
         {!isFinalStep ? <>
           <div className={`relative h-7 w-full overflow-hidden ${coloredOrLine}`}>
             <svg width="409" height="28" className="max-w-full -left-1/2" viewBox="0 0 409 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,11 +58,27 @@ const LumeIdentity: React.FC<Props> = ({ }) => {
 
 };
 
+// @ditorodev: We should see how we improve this to be more like Google's SSO
+// contrast is not very good, as im testing on a train with a lot of sunlight
+// hitting my screen, it is almost impossible to see whats happening the outline
+// buttons have no contrast
 export default () => {
   const [session, setSession] = React.useState<Session>();
   return <LumeIdentityContext.Provider value={{ session, setSession }}>
-    <SwitchableComponentProvider>
-      <LumeIdentity />
-    </SwitchableComponentProvider>
+    <Dialog.Root>
+      <Dialog.Trigger asChild>
+        <button className='bg-primary text-primary-foreground p-2 px-4 text-sm font-semibold font-mono rounded-md'>
+          Open Lume
+        </button>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay className="bg-black/90 data-[state=open]:animate-overlayShow fixed inset-0" />
+        <Dialog.Content className='w-full h-full flex items-center justify-center'>
+          <SwitchableComponentProvider>
+            <LumeIdentity />
+          </SwitchableComponentProvider>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   </LumeIdentityContext.Provider>
 };
