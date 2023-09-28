@@ -30,7 +30,7 @@ const CircularProgress = ({
   chain: Chain
   className?: string
 }) => {
-  const progressOffset = ((100 - chain.progress) / 100) * 565.48
+  const progressOffset = ((100 - chain.progress) / 100) * 282.74 // These math are not mathing
   const textOffset = (chain.progress / 100) * (30 - 44) + 44
 
   return (
