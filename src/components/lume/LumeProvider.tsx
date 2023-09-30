@@ -4,12 +4,13 @@ type LumeSyncState = 'syncing' | 'done' | 'error'
 
 export type Chain = {
   syncState: LumeSyncState,
+  name: string,
   chainId: string,
   active: boolean,
   progress: number, // in porcentage
   logs: string[],
   type: 'blockchain' | 'content',
-  peerCount?: number 
+  peerCount?: number
 }
 
 type LumeObject = {
@@ -27,15 +28,16 @@ const LumeProvider = ({ children }: { children: React.ReactNode }) => {
   const [lume, setLume] = React.useState<LumeObject>({
     chains: [
       {
+        name: 'Ethereum',
         syncState: 'done',
         chainId: '1',
         active: true,
         progress: 100,
         logs: [],
-        type: 'blockchain',
-        peerCount: 5
+        type: 'blockchain'
       },
       {
+        name: "IPFS",
         syncState: 'syncing',
         chainId: '2',
         active: false,
@@ -59,13 +61,13 @@ const LumeProvider = ({ children }: { children: React.ReactNode }) => {
 
 export default LumeProvider;
 
-export function useLume() { 
-  const ctx  = useContext(LumeContext); 
+export function useLume() {
+  const ctx = useContext(LumeContext);
 
-  if(!ctx) {
+  if (!ctx) {
     throw new Error('useLume must be used within a LumeProvider');
   }
-  
+
   const { lume } = ctx;
   return lume
 }
