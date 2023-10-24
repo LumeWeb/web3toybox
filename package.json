@@ -1,0 +1,41 @@
+{
+  "name": "opposite-osiris",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "^3.0.3",
+    "@astrojs/tailwind": "^5.0.2",
+    "@ethersproject/bytes": "^5.7.0",
+    "@lumeweb/kernel-dns-client": "^0.1.0-develop.7",
+    "@lumeweb/kernel-eth-client": "^0.1.0-develop.17",
+    "@lumeweb/kernel-handshake-client": "^0.1.0-develop.9",
+    "@lumeweb/kernel-ipfs-client": "^0.1.0-develop.25",
+    "@lumeweb/kernel-peer-discovery-client": "^0.0.2-develop.18",
+    "@lumeweb/kernel-swarm-client": "^0.1.0-develop.12",
+    "@lumeweb/sdk": "^0.1.0-develop.44",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@types/react": "^18.2.31",
+    "@types/react-dom": "^18.2.14",
+    "astro": "^3.3.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "json-data-uri": "^0.2.0",
+    "lucide-react": "^0.288.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss": "^3.3.3",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "patch-package": "^8.0.0",
+    "vite-plugin-optimizer": "^1.4.2"
+  }
+}
