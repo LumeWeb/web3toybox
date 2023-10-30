@@ -387,7 +387,7 @@ function App() {
   }
 
   return (
-    <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 h-screen w-screen bg-zinc-900 flex items-center flex-col p-8 space-y-3">
+    <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-screen h-full w-screen bg-zinc-900 flex items-center flex-col p-8 space-y-3">
       <Card className="w-full bg-zinc-950 border-zinc-800 shadow-xl max-w-4xl">
         <CardHeader className="flex flex-row justify-between">
           <div className="flex gap-x-2 items-center justify-center text-zinc-500">

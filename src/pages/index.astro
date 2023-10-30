@@ -19,15 +19,15 @@ import '@/styles/global.css'
     <title>Astro</title>
 </head>
 <body>
-<div class="h-screen w-full bg-zinc-900 flex flex-col items-center justify-center p-8 space-y-6">
-    <Card className="w-[650px] bg-zinc-950 border-zinc-800 shadow-xl">
+<div class="min-h-screen h-full w-full bg-zinc-900 flex flex-col items-center justify-center p-8 space-y-6">
+    <Card className="max-w-3xl bg-zinc-950 border-zinc-800 shadow-xl">
         <CardHeader>
             <img src={LogoImg.src} class="w-20 mb-8" />
             <CardTitle className='text-white'>Welcome to Web3Toybox</CardTitle>
             <CardDescription className='text-zinc-500 text-lg'>This is a place where you can play with different famous web3 apps in a truly decentralized way - no infura, no gateways, no censorship.</CardDescription>
         </CardHeader>
-        <CardContent className='flex flex-row justify-between gap-x-5'>
-            <Card className="w-[300px] bg-zinc-900 border-zinc-800 hover:shadow-lg hover:ring-1 hover:ring-green-400/20 hover:shadow-green-400/20 hover:transform-gpu hover:-translate-y-[3px] transition-all duration-150">
+        <CardContent className='flex flex-col md:flex-row gap-y-5 md:gap-y-0 justify-between gap-x-5'>
+            <Card className="md:max-w-[400px] w-full bg-zinc-900 border-zinc-800 hover:shadow-lg hover:ring-1 hover:ring-green-400/20 hover:shadow-green-400/20 hover:transform-gpu hover:-translate-y-[3px] transition-all duration-150">
                 <CardHeader>
                     <CardTitle className='text-white'>NFT Gallery</CardTitle>
                 </CardHeader>
@@ -44,7 +44,7 @@ import '@/styles/global.css'
                     </a>
                 </CardFooter>
             </Card>    
-            <Card className="w-[300px] bg-zinc-950 border-zinc-700 border-dashed">
+            <Card className="w-full max-w-[300px] bg-zinc-950 border-zinc-700 border-dashed">
                 <CardHeader>
                     <CardTitle className='text-zinc-400 mb-3'>More Coming Soon...</CardTitle>
                     <CardDescription className='text-zinc-400'> 
