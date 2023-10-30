@@ -387,8 +387,8 @@ function App() {
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 h-screen w-full bg-zinc-900 flex flex-col p-8 space-y-3">
-      <Card className="w-full bg-zinc-950 border-zinc-800 shadow-xl">
+    <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 h-screen w-screen bg-zinc-900 flex items-center flex-col p-8 space-y-3">
+      <Card className="w-full bg-zinc-950 border-zinc-800 shadow-xl max-w-4xl">
         <CardHeader className="flex flex-row justify-between">
           <div className="flex gap-x-2 items-center justify-center text-zinc-500">
             <img src={LogoImg.src} className="w-20 h-7" />
@@ -431,7 +431,7 @@ function App() {
         </CardContent>
       </Card>
       {auth.isLoggedIn && !ethStatus?.ready ? (
-        <span className="w-full block my-1 p-4 rounded-lg opacity-80 bg-yellow-900/70 border border-yellow-500 text-yellow-500">
+        <span className="max-w-4xl w-full block my-1 p-4 rounded-lg opacity-80 bg-yellow-900/70 border border-yellow-500 text-yellow-500">
           You'll need to wait for a couple minutes before we can start
           searching. You are currently locally syncing to the ETH network. <b className="font-bold">Current Progress: {ethStatus?.sync ? `${ethStatus?.sync.toLocaleString()}%` : 'Initializing...'}</b>
         </span>
