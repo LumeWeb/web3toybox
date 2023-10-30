@@ -6,7 +6,8 @@ import {CardDescription} from '@/components/ui/card';
 import {CardFooter} from '@/components/ui/card';
 import {CardHeader} from '@/components/ui/card';
 import {CardTitle} from '@/components/ui/card';
-import '@/styles/globals.css'
+import LogoImg from "../assets/lume-logo.png";
+import '@/styles/global.css'
 ---
 
 <html lang="en">
@@ -18,18 +19,47 @@ import '@/styles/globals.css'
     <title>Astro</title>
 </head>
 <body>
-<div class="h-full w-full bg-gray-100 dark:bg-black dark:text-white flex flex-col items-center justify-center p-8 space-y-6">
-    <Card class="w-[80%] mb-8">
+<div class="h-screen w-full bg-zinc-900 flex flex-col items-center justify-center p-8 space-y-6">
+    <Card className="w-[650px] bg-zinc-950 border-zinc-800 shadow-xl">
         <CardHeader>
-            <CardTitle>NFT Gallery</CardTitle>
+            <img src={LogoImg.src} class="w-20 mb-8" />
+            <CardTitle className='text-white'>Welcome to Web3Toybox</CardTitle>
+            <CardDescription className='text-zinc-500 text-lg'>This is a place where you can play with different famous web3 apps in a truly decentralized way - no infura, no gateways, no censorship.</CardDescription>
         </CardHeader>
-        <CardContent>
-            <CardDescription>This is a short description of the demo.</CardDescription>
+        <CardContent className='flex flex-row justify-between gap-x-5'>
+            <Card className="w-[300px] bg-zinc-900 border-zinc-800 hover:shadow-lg hover:ring-1 hover:ring-green-400/20 hover:shadow-green-400/20 hover:transform-gpu hover:-translate-y-[3px] transition-all duration-150">
+                <CardHeader>
+                    <CardTitle className='text-white'>NFT Gallery</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <CardDescription className='text-zinc-500'>
+                        Here, you can explore all your favorite ENS and Ethereum addresses and discover the unique NFTs they hold. Whether you're a seasoned collector or a newcomer to the space, our gallery offers a comprehensive and engaging way to interact with these digital assets.
+                    </CardDescription>
+                </CardContent>
+                <CardFooter>
+                    <a href="/nft-gallery" class="w-full">
+                        <Button variant="default" className="mt-4 w-full">
+                            Start Exploring
+                        </Button>
+                    </a>
+                </CardFooter>
+            </Card>    
+            <Card className="w-[300px] bg-zinc-950 border-zinc-700 border-dashed">
+                <CardHeader>
+                    <CardTitle className='text-zinc-400 mb-3'>More Coming Soon...</CardTitle>
+                    <CardDescription className='text-zinc-400'> 
+                        We're diligently developing more intriguing examples. If you have any suggestions, don't hesitate to join our Discord channel and propose or submit any examples you'd like to see here!
+                        <a href="https://discord.com/invite/qpC8ADp3rS">
+                            <Button variant="link" className='h-auto p-0 inline pl-1'>
+                                Join Discord
+                            </Button>
+                        </a>
+                    </CardDescription>
+                </CardHeader>
+            </Card>      
         </CardContent>
         <CardFooter>
-            <Button variant="outline" class="mt-4">
-                <a href="/nft-gallery">Explore Demo</a>
-            </Button>
+            <p class="text-zinc-700 text-sm">Brought to you with 💚 by the <a href="https://lumeweb.com" class="text-zinc-500 underline">lumeweb.com</a> team alongside the <a href="https://sia.tech/about-sia-foundation" class="text-zinc-500 underline">Sia Foundation</a></p>
         </CardFooter>
     </Card>
 </div>
