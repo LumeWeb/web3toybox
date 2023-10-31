@@ -1,7 +1,3 @@
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import "@lumeweb/sdk/lib/style.css";
-import "@/styles/global.css";
 import React, {
   createContext,
   createRef,
@@ -42,6 +38,11 @@ import jdu from "json-data-uri";
 import { ERC721_ABI } from "@/lib/erc721-abi";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import LogoImg from "@/assets/lume-logo.png";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import "@lumeweb/sdk/lib/style.css";
+import "@/styles/global.css";
+
 let BOOT_FUNCTIONS: (() => Promise<any>)[] = [];
 
 export const AppContext = createContext<any>(undefined);
