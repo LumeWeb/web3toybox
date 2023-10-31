@@ -253,7 +253,7 @@ function LoginDash() {
         <LumeDashboard disabled={!ready}>
           <LumeDashboardTrigger asChild>
             <Button variant={"default"} disabled={!inited}>
-              Login
+              Open Dashboard
             </Button>
           </LumeDashboardTrigger>
         </LumeDashboard>
