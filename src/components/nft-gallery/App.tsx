@@ -230,8 +230,7 @@ async function bootup() {
 }
 
 function LoginDash() {
-  // const { isLoggedIn } = useAuth();
-  const isLoggedIn = false;
+  const { isLoggedIn } = useAuth();
   const { ready, inited } = useLumeStatus();
 
   return (
