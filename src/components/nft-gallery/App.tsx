@@ -40,8 +40,6 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import LogoImg from "@/assets/lume-logo.png";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import "@lumeweb/sdk/lib/style.css";
-import "@/styles/global.css";
 
 let BOOT_FUNCTIONS: (() => Promise<any>)[] = [];
 
@@ -232,7 +230,8 @@ async function bootup() {
 }
 
 function LoginDash() {
-  const { isLoggedIn } = useAuth();
+  // const { isLoggedIn } = useAuth();
+  const isLoggedIn = false;
   const { ready, inited } = useLumeStatus();
 
   return (
